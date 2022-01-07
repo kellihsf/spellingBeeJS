@@ -125,7 +125,7 @@ e_button.addEventListener("click", (event) => {
 })
 
 f_button.addEventListener("click", (event) => {
-    // shutdowns the default behavior - to submit something
+    // preventDefault shutdowns the default behavior of the button - to submit something
     event.preventDefault();
     clickedLetter = f_button.value;
     wordDIV.innerHTML += clickedLetter;
@@ -134,5 +134,24 @@ f_button.addEventListener("click", (event) => {
 
 //add a function to take your word from the word div and add it to an Array to then add to your Words Bank
 
+const wordsBankArray = [];
+let wordCount = 0;
 
+foundTitle.innerHTML = `You have found ${wordCount} words!`
+wordsBankDIV.appendChild(foundTitle);
 
+// you can use e for event
+addButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    wordsBankArray.push(wordDIV.innerHTML);
+    console.log("wordsBankArray", wordsBankArray);
+
+    let newWordDIV = document.createElement("div");
+    newWordDIV.setAttribute("id", `${wordCount}`);
+    newWordDIV.classList.add("is-size-2");
+    newWordDIV.innerHTML = wordsBankArray[wordCount];
+    wordsBankDIV.appendChild(newWordDIV);
+    wordCount ++
+    foundTitle.innerHTML = `You have found ${wordCount} words!`
+    wordDIV.innerHTML = "";
+})
